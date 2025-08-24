@@ -38,6 +38,33 @@ type BreakdownPart = {
   note?: string;
 };
 
+type ResultRow = {
+  symbol: string;
+  tradeDate: string;
+  expirationDate: string;
+  dte: number;
+  type: "put" | "call";
+  strike: number;
+  bid: number;
+  supportLevel: number;
+  beta: number;
+  delta: number;
+  premium: number;
+  breakeven: number;
+  annualROI: number;
+  collateralAtRisk?: number;
+  supportVariancePct?: number | null;
+  hardFail: boolean;
+  score: number;
+  suggestion: SuggestionLabel; // ensure union, not string
+  // breakdown fields (optional)
+  breakdown?: BreakdownPart[];
+  totalPossible?: number;
+  pointsBeforePenalties?: number;
+  penaltiesApplied?: number;
+  pointsFinal?: number;
+};
+
 /** ================== ICONS ================== */
 const IconDuplicate = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden focusable="false">
@@ -184,6 +211,10 @@ const ScoreBar: React.FC<{ score: number }> = ({ score }) => (
 );
 
 /** ================== MAIN ================== */
+const API_BASE =
+  process.env.NEXT_PUBLIC_API_BASE_URL?.replace(/\/+$/, "") ||
+  "http://localhost:5000";
+
 export default function Home() {
   const [trades, setTrades] = useState<TradeInput[]>([]);
   const [tradeDisplay, setTradeDisplay] = useState<any[]>([]);
@@ -191,7 +222,7 @@ export default function Home() {
   const [displayTolerances, setDisplayTolerances] = useState<Record<TolKeys, string>>({
     maxDTE: "", minROI: "", maxBeta: "", maxDelta: "",
   });
-  const [results, setResults] = useState<any[]>([]);
+  const [results, setResults] = useState<ResultRow[]>([]);
   const [sortKeyState, setSortKeyState] = useState<SortKey>("score");
   const [sortDirState, setSortDirState] = useState<"asc" | "desc">("desc");
   const [expanded, setExpanded] = useState<Record<number, boolean>>({});
@@ -259,29 +290,48 @@ export default function Home() {
 
   /** ------- Evaluate / results ------- */
   const evaluateTrades = async () => {
-    const res = await fetch("http://localhost:5000/api/evaluate-trades", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ tolerances, trades }),
-    });
-    if (!res.ok) return alert("Error evaluating trades");
-    const data = await res.json();
-    setResults(data);
-    setExpanded({}); // collapse any open breakdowns
+    try {
+      const res = await fetch(`${API_BASE}/api/evaluate-trades`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ tolerances, trades }),
+      });
+      if (!res.ok) {
+        const text = await res.text();
+        alert(`Error evaluating trades: ${res.status} ${res.statusText}\n${text}`);
+        return;
+      }
+      const data: ResultRow[] = await res.json();
+      setResults(data);
+      setExpanded({}); // collapse any open breakdowns
+    } catch (err: any) {
+      alert(`Network error: ${err?.message || err}`);
+    }
   };
   const clearResults = () => { setResults([]); setExpanded({}); };
 
   /** ------- Sort ------- */
   const suggestionOrder: Record<SuggestionLabel, number> = { Conservative: 3, Neutral: 2, Aggressive: 1 };
+
   const sortedResults = useMemo(() => {
     const clone = [...results];
     const dir = sortDirState === "asc" ? 1 : -1;
     return clone.sort((a, b) => {
-      const va = a[sortKeyState]; const vb = b[sortKeyState];
-      if (sortKeyState === "suggestion") return ((suggestionOrder[va] ?? 0) - (suggestionOrder[vb] ?? 0)) * dir;
-      if (sortKeyState === "tradeDate" || sortKeyState === "expirationDate") return String(va).localeCompare(String(vb)) * dir;
-      if (typeof va === "string" && typeof vb === "string") return va.localeCompare(vb) * dir;
-      return ((va ?? 0) - (vb ?? 0)) * dir;
+      const va = (a as any)[sortKeyState];
+      const vb = (b as any)[sortKeyState];
+
+      if (sortKeyState === "suggestion") {
+        const aKey = String(va) as keyof typeof suggestionOrder;
+        const bKey = String(vb) as keyof typeof suggestionOrder;
+        return ((suggestionOrder[aKey] ?? 0) - (suggestionOrder[bKey] ?? 0)) * dir;
+      }
+      if (sortKeyState === "tradeDate" || sortKeyState === "expirationDate") {
+        return String(va).localeCompare(String(vb)) * dir;
+      }
+      if (typeof va === "string" && typeof vb === "string") {
+        return va.localeCompare(vb) * dir;
+      }
+      return ((Number(va) || 0) - (Number(vb) || 0)) * dir;
     });
   }, [results, sortKeyState, sortDirState]);
 
@@ -401,7 +451,7 @@ export default function Home() {
           <div className="tol-wrap">
             <h3 style={{ marginBottom: 8 }}>Trade Tolerances</h3>
 
-            {/* MOVED: Clear Tolerances button directly under header, aligned left */}
+            {/* Clear Tolerances button under header */}
             <div className="toolbar" style={{ margin: "0 0 10px 0" }}>
               <button className="btn warn" onClick={clearTolerances}>Clear Tolerances</button>
             </div>
@@ -446,7 +496,7 @@ export default function Home() {
             <h3>Trade Consideratons</h3>
           </div>
 
-          {/* REALIGNED & REORDERED: Buttons under header, left-aligned; order: Add -> Reset -> Evaluate */}
+          {/* Buttons under header, left-aligned; order: Add -> Reset -> Evaluate */}
           <div className="sticky-actions">
             <button className="btn primary" onClick={addTrade}>Add Trade</button>
             <button className="btn warn" onClick={resetTrades}>Reset Trades</button>
@@ -590,7 +640,7 @@ export default function Home() {
                     </tr>
                   </thead>
                   <tbody>
-                    {sortedResults.map((r: any, idx: number) => {
+                    {sortedResults.map((r: ResultRow, idx: number) => {
                       const open = !!expanded[idx];
                       return (
                         <React.Fragment key={idx}>
@@ -617,7 +667,7 @@ export default function Home() {
                             <td className="ta-center">{r.supportVariancePct != null ? `${Number(r.supportVariancePct).toFixed(1)}%` : ""}</td>
                             <td className="ta-center">{r.hardFail ? "Yes" : "No"}</td>
                             <td className="ta-center"><ScoreBar score={r.score ?? 0} /></td>
-                            <td className="ta-center"><SuggestionBadge value={r.suggestion as SuggestionLabel} /></td>
+                            <td className="ta-center"><SuggestionBadge value={r.suggestion} /></td>
                           </tr>
 
                           {open && (
@@ -679,3 +729,4 @@ export default function Home() {
     </div>
   );
 }
+
