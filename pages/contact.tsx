@@ -9,7 +9,7 @@ export default function ContactPage() {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Simple mailto fallback (no backend). Later we can integrate Formspree/EmailJS.
+  // Simple mailto handler (no backend). We can wire Formspree/EmailJS later.
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const subject = encodeURIComponent("Options Screener — Contact");
@@ -44,7 +44,7 @@ export default function ContactPage() {
           <h1>Contact</h1>
 
           <div className="grid">
-            <form className="card" onSubmit={handleSubmit}>
+            <form className="card" onSubmit={handleSubmit} noValidate>
               <div className="row">
                 <label htmlFor="name">Name</label>
                 <input
@@ -63,7 +63,7 @@ export default function ContactPage() {
                 <label htmlFor="phone">Phone</label>
                 <input
                   id="phone" name="phone" type="tel" value={form.phone}
-                  onChange={handleChange} placeholder="601.862.8625"
+                  onChange={handleChange} placeholder="111-222-3434"
                 />
               </div>
               <div className="row">
@@ -134,13 +134,26 @@ export default function ContactPage() {
           padding: 18px; box-shadow: 0 8px 18px rgba(0,0,0,.25);
         }
 
+        /* Ensure inputs never overflow the card */
         form .row { display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
         label { color: #0f172a; font-weight: 700; font-size: 14px; }
         input, textarea {
-          width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid #94a3b8;
-          background: #ffffff; color: #0f172a; font-size: 15px;
+          display: block;
+          width: 100%;
+          max-width: 100%;
+          box-sizing: border-box; /* critical: no overflow */
+          padding: 10px 12px;
+          border-radius: 10px;
+          border: 1px solid #94a3b8;
+          background: #ffffff;
+          color: #0f172a;
+          font-size: 15px;
         }
-        input:focus, textarea:focus { outline: none; border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,.2); }
+        input:focus, textarea:focus {
+          outline: none;
+          border-color: #2563eb;
+          box-shadow: 0 0 0 3px rgba(37,99,235,.2);
+        }
         textarea { min-height: 120px; resize: vertical; }
 
         .direct h2 { margin: 0 0 8px; }
