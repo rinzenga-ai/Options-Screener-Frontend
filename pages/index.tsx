@@ -10,6 +10,7 @@ export default function LandingPage() {
           name="description"
           content="Quantitative scoring for options trades. Configure tolerances, evaluate instantly, and export — built for institutional use."
         />
+        {/* Open Graph / Social */}
         <meta property="og:title" content="Options Screener" />
         <meta
           property="og:description"
@@ -17,6 +18,7 @@ export default function LandingPage() {
         />
         <meta property="og:image" content="/hero.png" />
         <meta property="og:type" content="website" />
+        {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Options Screener" />
         <meta
@@ -50,9 +52,17 @@ export default function LandingPage() {
             <div className="hero-copy">
               <h1>Data-Driven Trade Evaluation Platform</h1>
               <p className="sub">
-                Quantitative scoring for options trades. Configure tolerances,
-                evaluate instantly, and export — built for institutional use.
+                Evaluate options trades with transparent scoring. Set your tolerances for ROI, Delta, Beta, and DTE,
+                then compare candidates instantly — consistent, auditable, and easy to export.
               </p>
+
+              <ul className="bullets">
+                <li><span className="dot" /> Configurable tolerances with meaningful penalties</li>
+                <li><span className="dot" /> Clear breakdown of points and deductions</li>
+                <li><span className="dot" /> Suggestion bands: Conservative / Neutral / Aggressive</li>
+                <li><span className="dot" /> CSV export and production-ready API</li>
+              </ul>
+
               <div className="cta">
                 <a href="/app" className="btn primary" aria-label="Launch demo app">Launch Demo</a>
                 <a
@@ -65,13 +75,8 @@ export default function LandingPage() {
                   Download One-Pager
                 </a>
               </div>
-              <ul className="bullets">
-                <li>Custom tolerances for ROI / Delta / Beta / DTE</li>
-                <li>Transparent scoring with exceedance penalties</li>
-                <li>Conservative / Neutral / Aggressive suggestion bands</li>
-                <li>CSV export and production-ready API</li>
-              </ul>
             </div>
+
             <div className="hero-shot">
               <img src="/hero.png" alt="Options Screener — app screenshot" />
             </div>
@@ -84,17 +89,15 @@ export default function LandingPage() {
             <div className="card">
               <h2>The Problem</h2>
               <p>
-                Evaluating puts/calls is noisy and manual. Traders juggle ROI,
-                Delta, Beta, DTE and support levels while bias slips in. Existing
-                tools are slow, inconsistent, and hard to audit.
+                Evaluating puts/calls is noisy and manual. Traders juggle ROI, Delta, Beta, DTE and support levels
+                while bias slips in. Existing tools are slow, inconsistent, and hard to audit.
               </p>
             </div>
             <div className="card">
               <h2>What’s Needed</h2>
               <p>
-                A configurable scoring system that applies risk thresholds
-                consistently, surfaces the right opportunities, and produces
-                transparent outputs for review and compliance.
+                A configurable scoring system that applies risk thresholds consistently, surfaces the right opportunities,
+                and produces transparent outputs for review and compliance.
               </p>
             </div>
           </div>
@@ -106,8 +109,7 @@ export default function LandingPage() {
             <div className="center">
               <h2>The Solution</h2>
               <p className="muted">
-                Options Screener ranks trades using your tolerances — fast,
-                consistent, auditable.
+                Options Screener ranks trades using your tolerances — fast, consistent, auditable.
               </p>
             </div>
 
@@ -115,29 +117,29 @@ export default function LandingPage() {
               <div className="feature" role="listitem">
                 <h3>Configurable Tolerances</h3>
                 <p>
-                  Set limits for ROI, Delta, Beta, and DTE. Exceedances apply
-                  meaningful penalties so your policy drives the score.
+                  Set limits for ROI, Delta, Beta, and DTE. Exceedances apply meaningful penalties
+                  so your policy drives the score.
                 </p>
               </div>
               <div className="feature" role="listitem">
                 <h3>Transparent Scoring</h3>
                 <p>
-                  Per-trade breakdown shows points, deductions, and final score.
-                  Executive-friendly suggestion bands: Conservative / Neutral / Aggressive.
+                  Per-trade breakdown shows points, deductions, and final score. Executive-friendly suggestion
+                  bands: Conservative / Neutral / Aggressive.
                 </p>
               </div>
               <div className="feature" role="listitem">
                 <h3>Fast Evaluation</h3>
                 <p>
-                  Enter trades, click Evaluate, and export results. Built on a
-                  production API ready for enterprise integration.
+                  Enter trades, click Evaluate, and export results. Built on a production API ready for
+                  enterprise integration.
                 </p>
               </div>
               <div className="feature" role="listitem">
                 <h3>Professional UI</h3>
                 <p>
-                  Clean, compact, and accessible. Light cards over a dark canvas
-                  to focus attention on decisions, not clutter.
+                  Clean, compact, and accessible. Light cards over a dark canvas to focus attention on decisions,
+                  not clutter.
                 </p>
               </div>
             </div>
@@ -150,8 +152,8 @@ export default function LandingPage() {
             <div>
               <h2>See it in action</h2>
               <p className="muted">
-                Try the live demo and download the one-pager. For enterprise
-                licensing or a deeper walkthrough, reach out anytime.
+                Try the live demo and download the one-pager. For enterprise licensing or a deeper walkthrough,
+                reach out anytime.
               </p>
             </div>
             <div className="cta-buttons">
@@ -189,15 +191,16 @@ export default function LandingPage() {
         :global(html, body) { padding: 0; margin: 0; }
         .page { background: #000; color: #e5e7eb; min-height: 100vh; }
 
-        /* Container is now left-justified */
-        .container { width: 100%; padding: 0 16px; }
+        /* Left-justified container with a right bound so content doesn't hang off */
+        .container { max-width: 1180px; padding: 0 16px; margin-left: 0; margin-right: auto; }
+
         .center { text-align: center; }
 
         /* Top nav */
         .nav { position: sticky; top: 0; z-index: 10; background: #000; border-bottom: 1px solid #0b0b0b; }
-        .nav-inner { height: 56px; display: flex; align-items: center; justify-content: space-between; }
-        .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
-        .brand-logo { height: 44px; width: auto; display: block; } /* logo larger than before */
+        .nav-inner { height: 64px; display: flex; align-items: center; justify-content: space-between; }
+        .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
+        .brand-logo { height: 56px; width: auto; display: block; } /* larger logo */
         .brand-text { font-weight: 900; letter-spacing: .2px; color: #f3f4f6; font-size: 18px; }
         .links a { color: #cbd5e1; margin-left: 16px; text-decoration: none; font-weight: 600; }
         .links a:hover { color: #fff; }
@@ -220,16 +223,17 @@ export default function LandingPage() {
                       #000;
           border-bottom: 1px solid #0b0b0b;
         }
-        .hero-inner { display: grid; grid-template-columns: 1.05fr .95fr; gap: 24px; padding: 48px 0; align-items: center; }
-        .hero-copy h1 { margin: 0 0 10px; font-size: 36px; font-weight: 900; color: #fff; }
-        .sub { margin: 0 0 16px; color: #cbd5e1; max-width: 620px; }
-        .cta { display: flex; gap: 12px; margin: 16px 0 8px; flex-wrap: wrap; }
-        .bullets { margin: 18px 0 0; padding-left: 18px; color: #cbd5e1; }
-        .bullets li { margin: 6px 0; }
-        .hero-shot img { width: 100%; height: auto; border-radius: 14px; border: 1px solid #1f2937; box-shadow: 0 12px 30px rgba(0,0,0,.45); background: #0b0b0b; }
+        .hero-inner { display: grid; grid-template-columns: 1.05fr .95fr; gap: 28px; padding: 56px 0; align-items: center; }
+        .hero-copy h1 { margin: 0 0 16px; font-size: 38px; font-weight: 900; color: #fff; } /* more breathing room */
+        .sub { margin: 0 0 18px; color: #cbd5e1; max-width: 700px; line-height: 1.65; } /* nicer rhythm */
+        .bullets { margin: 10px 0 18px; padding-left: 0; list-style: none; }
+        .bullets li { display: flex; align-items: baseline; gap: 8px; margin: 8px 0; color: #d1d5db; line-height: 1.6; }
+        .dot { display: inline-block; width: 7px; height: 7px; border-radius: 999px; background: #60a5fa; margin-top: 6px; flex: 0 0 7px; }
+        .cta { display: flex; gap: 12px; margin: 10px 0 0; flex-wrap: wrap; }
+        .hero-shot img { width: 100%; max-width: 560px; height: auto; border-radius: 14px; border: 1px solid #1f2937; box-shadow: 0 12px 30px rgba(0,0,0,.45); background: #0b0b0b; }
 
         /* Sections */
-        .section { padding: 42px 0; }
+        .section { padding: 44px 0; }
         .section.light { background: #0a0a0a; border-top: 1px solid #0b0b0b; border-bottom: 1px solid #0b0b0b; }
         .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
         .card { background: #e9eef5; color: #0f172a; border: 1px solid #cbd5e1; border-radius: 12px; padding: 16px; box-shadow: 0 8px 18px rgba(0,0,0,.25); }
@@ -251,22 +255,24 @@ export default function LandingPage() {
         .sep { margin: 0 8px; color: #334155; }
 
         /* Responsive */
-        @media (max-width: 980px) {
-          .hero-inner { grid-template-columns: 1fr; padding: 30px 0; }
-          .two-col { grid-template-columns: 1fr; }
+        @media (max-width: 1100px) {
           .features { grid-template-columns: 1fr 1fr; }
-          .cta-inner { grid-template-columns: 1fr; gap: 12px; }
-          .links a { margin-left: 12px; }
+        }
+
+        @media (max-width: 860px) {
+          .hero-inner { grid-template-columns: 1fr; padding: 36px 0; }
+          .hero-shot img { max-width: 100%; }
+          .two-col { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 560px) {
-          .features { grid-template-columns: 1fr; }
           .btn.large { height: 46px; line-height: 46px; }
-          .hero-copy h1 { font-size: 28px; }
-          .brand-logo { height: 36px; } /* slightly smaller on mobile */
+          .hero-copy h1 { font-size: 30px; }
+          .brand-logo { height: 46px; } /* slightly reduced on small screens */
         }
       `}</style>
     </>
   );
 }
+
 
