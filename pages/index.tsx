@@ -40,7 +40,6 @@ export default function LandingPage() {
               <a href="#solution">Solution</a>
               <a href="#features">Features</a>
               <a href="/app" className="btn small primary">Launch Demo</a>
-              {/* New: Contact link styled like the other text links */}
               <a href="/contact">Contact</a>
             </nav>
           </div>
@@ -76,10 +75,11 @@ export default function LandingPage() {
                   Download One-Pager
                 </a>
               </div>
-            </div>
 
-            <div className="hero-shot">
-              <img src="/hero.png" alt="Options Screener — app screenshot" />
+              {/* NEW: Move the hero image below the CTAs and enlarge */}
+              <div className="hero-shot below">
+                <img src="/hero.png" alt="Options Screener — app screenshot" />
+              </div>
             </div>
           </div>
         </section>
@@ -195,7 +195,7 @@ export default function LandingPage() {
         :global(html, body) { padding: 0; margin: 0; }
         .page { background: #000; color: #e5e7eb; min-height: 100vh; }
 
-        /* Centered container, consistent width across sections */
+        /* Centered container */
         .container { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
         .center { text-align: center; }
 
@@ -208,7 +208,7 @@ export default function LandingPage() {
         .links { display: flex; align-items: center; gap: 16px; }
         .links a { color: #cbd5e1; text-decoration: none; font-weight: 600; }
         .links a:hover { color: #fff; }
-        .links .btn.small { margin-left: 6px; } /* keep a bit of space before the Contact link */
+        .links .btn.small { margin-left: 6px; }
 
         /* Buttons */
         .btn { display: inline-block; height: 40px; line-height: 40px; padding: 0 16px; border-radius: 10px;
@@ -218,10 +218,10 @@ export default function LandingPage() {
         .btn.primary:hover { background: #1d4ed8; }
         .btn.ghost { background: transparent; color: #e5e7eb; border-color: #64748b; }
         .btn.ghost:hover { background: rgba(255,255,255,.06); }
-        .btn.small { height: 30px; line-height: 30px; padding: 0 10px; border-radius: 8px; font-weight: 800; }
         .btn.large { height: 48px; line-height: 48px; padding: 0 18px; border-radius: 12px; font-size: 16px; }
+        .btn.small { height: 30px; line-height: 30px; padding: 0 10px; border-radius: 8px; font-weight: 800; }
 
-        /* Hero band */
+        /* Hero */
         .hero {
           background:
             radial-gradient(1200px 600px at 20% -10%, rgba(37,99,235,.25), transparent 60%),
@@ -229,22 +229,27 @@ export default function LandingPage() {
             #000;
           border-bottom: 1px solid #0b0b0b;
         }
-        .hero-inner {
-          display: grid; grid-template-columns: 1.1fr .9fr; gap: 32px;
-          align-items: center; padding: 60px 0; min-height: 72vh;
-        }
-        .hero-copy { text-align: center; }
+        .hero-inner { padding: 60px 0; min-height: 60vh; }
+        .hero-copy { text-align: center; max-width: 980px; margin: 0 auto; }
         .hero-title { margin: 0 0 18px; font-size: 42px; font-weight: 900; color: #fff; white-space: nowrap; }
         .sub { margin: 0 auto 20px; color: #d6d9df; max-width: 820px; line-height: 1.65; }
 
-        /* Bullets */
         .bullets { margin: 0 auto 22px; padding-left: 0; list-style: none; max-width: 760px; }
         .bullets li { display: flex; gap: 12px; margin: 10px 0; color: #eceff4; line-height: 1.6; }
         .dot { display: inline-block; width: 7px; height: 7px; border-radius: 999px; background: #fff; margin-top: 8px; flex: 0 0 7px; }
         .cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
-        .hero-shot { display: flex; justify-content: center; }
-        .hero-shot img { width: 100%; max-width: 640px; height: auto; border-radius: 14px; border: 1px solid #1f2937; box-shadow: 0 12px 30px rgba(0,0,0,.45); background: #0b0b0b; }
+        /* Enlarged hero image below CTAs */
+        .hero-shot.below { margin: 26px auto 0; display: flex; justify-content: center; }
+        .hero-shot.below img {
+          width: 100%;
+          max-width: 980px; /* larger visual */
+          height: auto;
+          border-radius: 14px;
+          border: 1px solid #1f2937;
+          box-shadow: 0 12px 30px rgba(0,0,0,.45);
+          background: #0b0b0b;
+        }
 
         /* Sections */
         .section { padding: 48px 0; }
@@ -286,15 +291,10 @@ export default function LandingPage() {
           .features { grid-template-columns: 1fr 1fr; }
         }
         @media (max-width: 940px) {
-          .hero-inner { grid-template-columns: 1fr; padding: 44px 0; min-height: auto; }
+          .hero-title { white-space: normal; } /* allow wrap on small screens */
           .grid-2 { grid-template-columns: 1fr; }
           .cta-band { grid-template-columns: 1fr; gap: 12px; }
           .cta-buttons { justify-content: center; }
-          .hero-title { white-space: normal; } /* allow wrap on smaller screens */
-        }
-        @media (max-width: 560px) {
-          .brand-logo { height: 50px; }
-          .btn.large { height: 46px; line-height: 46px; }
         }
       `}</style>
     </>
