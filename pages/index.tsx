@@ -10,7 +10,6 @@ export default function LandingPage() {
           name="description"
           content="Quantitative scoring for options trades. Configure tolerances, evaluate instantly, and export — built for institutional use."
         />
-        {/* Open Graph / Social */}
         <meta property="og:title" content="Options Screener" />
         <meta
           property="og:description"
@@ -18,7 +17,6 @@ export default function LandingPage() {
         />
         <meta property="og:image" content="/hero.png" />
         <meta property="og:type" content="website" />
-        {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Options Screener" />
         <meta
@@ -34,7 +32,6 @@ export default function LandingPage() {
         <header className="nav">
           <div className="container nav-inner">
             <a href="/" className="brand" aria-label="INZ Options Screener Home">
-              {/* Transparent logo (upload to /public/inz-logo.png) */}
               <img src="/inz-logo.png" alt="INZ logo" className="brand-logo" />
               <span className="brand-text">Options Screener</span>
             </a>
@@ -76,7 +73,6 @@ export default function LandingPage() {
               </ul>
             </div>
             <div className="hero-shot">
-              {/* If hero.png is not ready, you can comment this out */}
               <img src="/hero.png" alt="Options Screener — app screenshot" />
             </div>
           </div>
@@ -200,7 +196,7 @@ export default function LandingPage() {
         .nav { position: sticky; top: 0; z-index: 10; background: #000; border-bottom: 1px solid #0b0b0b; }
         .nav-inner { height: 56px; display: flex; align-items: center; justify-content: space-between; }
         .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
-        .brand-logo { height: 32px; width: auto; display: block; }
+        .brand-logo { height: 64px; width: auto; display: block; } /* doubled from 32px to 64px */
         .brand-text { font-weight: 900; letter-spacing: .2px; color: #f3f4f6; }
         .links a { color: #cbd5e1; margin-left: 16px; text-decoration: none; font-weight: 600; }
         .links a:hover { color: #fff; }
@@ -266,10 +262,9 @@ export default function LandingPage() {
           .features { grid-template-columns: 1fr; }
           .btn.large { height: 46px; line-height: 46px; }
           .hero-copy h1 { font-size: 28px; }
-          .brand-logo { height: 26px; }
+          .brand-logo { height: 52px; } /* keep logo readable on mobile */
         }
       `}</style>
     </>
   );
 }
-
