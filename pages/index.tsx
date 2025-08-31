@@ -5,7 +5,7 @@ export default function LandingPage() {
   return (
     <>
       <Head>
-        <title>Options Screener — Data-Driven Trade Evaluation</title>
+        <title>Options Screener — Data Driven Trade Evaluation Platform</title>
         <meta
           name="description"
           content="Quantitative scoring for options trades. Configure tolerances, evaluate instantly, and export — built for institutional use."
@@ -50,7 +50,8 @@ export default function LandingPage() {
         <section className="hero">
           <div className="container hero-inner">
             <div className="hero-copy">
-              <h1>Data-Driven Trade Evaluation Platform</h1>
+              <h1 className="hero-title nowrap-desktop">Data Driven Trade Evaluation Platform</h1>
+
               <p className="sub">
                 Evaluate options trades with transparent scoring. Set your tolerances for ROI, Delta, Beta, and DTE,
                 then compare candidates instantly — consistent, auditable, and easy to export.
@@ -191,8 +192,8 @@ export default function LandingPage() {
         :global(html, body) { padding: 0; margin: 0; }
         .page { background: #000; color: #e5e7eb; min-height: 100vh; }
 
-        /* Left-justified container with a right bound so content doesn't hang off */
-        .container { max-width: 1180px; padding: 0 16px; margin-left: 0; margin-right: auto; }
+        /* Wider left-justified container so the page fills the screen at 100% without feeling narrow */
+        .container { max-width: 1380px; padding: 0 16px; margin-left: 0; margin-right: auto; }
 
         .center { text-align: center; }
 
@@ -200,7 +201,7 @@ export default function LandingPage() {
         .nav { position: sticky; top: 0; z-index: 10; background: #000; border-bottom: 1px solid #0b0b0b; }
         .nav-inner { height: 64px; display: flex; align-items: center; justify-content: space-between; }
         .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
-        .brand-logo { height: 56px; width: auto; display: block; } /* larger logo */
+        .brand-logo { height: 60px; width: auto; display: block; } /* increased logo size a bit more */
         .brand-text { font-weight: 900; letter-spacing: .2px; color: #f3f4f6; font-size: 18px; }
         .links a { color: #cbd5e1; margin-left: 16px; text-decoration: none; font-weight: 600; }
         .links a:hover { color: #fff; }
@@ -224,13 +225,18 @@ export default function LandingPage() {
           border-bottom: 1px solid #0b0b0b;
         }
         .hero-inner { display: grid; grid-template-columns: 1.05fr .95fr; gap: 28px; padding: 56px 0; align-items: center; }
-        .hero-copy h1 { margin: 0 0 16px; font-size: 38px; font-weight: 900; color: #fff; } /* more breathing room */
-        .sub { margin: 0 0 18px; color: #cbd5e1; max-width: 700px; line-height: 1.65; } /* nicer rhythm */
-        .bullets { margin: 10px 0 18px; padding-left: 0; list-style: none; }
-        .bullets li { display: flex; align-items: baseline; gap: 8px; margin: 8px 0; color: #d1d5db; line-height: 1.6; }
-        .dot { display: inline-block; width: 7px; height: 7px; border-radius: 999px; background: #60a5fa; margin-top: 6px; flex: 0 0 7px; }
-        .cta { display: flex; gap: 12px; margin: 10px 0 0; flex-wrap: wrap; }
-        .hero-shot img { width: 100%; max-width: 560px; height: auto; border-radius: 14px; border: 1px solid #1f2937; box-shadow: 0 12px 30px rgba(0,0,0,.45); background: #0b0b0b; }
+        .hero-title { margin: 0 0 18px; font-size: 40px; font-weight: 900; color: #fff; }
+        .nowrap-desktop { white-space: nowrap; }
+        .sub { margin: 0 0 18px; color: #d6d9df; max-width: 760px; line-height: 1.65; }
+
+        /* Bullets: indented and white dots */
+        .bullets { margin: 6px 0 20px; padding-left: 0; list-style: none; }
+        .bullets li { display: flex; align-items: baseline; gap: 10px; margin: 8px 0; color: #e8eaee; line-height: 1.6; }
+        .bullets { margin-left: 22px; }        /* indent bullets a bit */
+        .dot { display: inline-block; width: 7px; height: 7px; border-radius: 999px; background: #ffffff; margin-top: 7px; flex: 0 0 7px; }
+
+        .cta { display: flex; gap: 12px; margin: 12px 0 0; flex-wrap: wrap; }
+        .hero-shot img { width: 100%; max-width: 640px; height: auto; border-radius: 14px; border: 1px solid #1f2937; box-shadow: 0 12px 30px rgba(0,0,0,.45); background: #0b0b0b; }
 
         /* Sections */
         .section { padding: 44px 0; }
@@ -246,6 +252,7 @@ export default function LandingPage() {
         /* CTA band */
         .cta { background: #000; }
         .cta-inner { display: grid; grid-template-columns: 1.2fr .8fr; gap: 18px; align-items: center; }
+        .cta-buttons { display: flex; gap: 14px; } /* slight extra space between buttons at the bottom */
 
         /* Footer */
         .footer { border-top: 1px solid #0b0b0b; background: #000; }
@@ -255,24 +262,22 @@ export default function LandingPage() {
         .sep { margin: 0 8px; color: #334155; }
 
         /* Responsive */
-        @media (max-width: 1100px) {
+        @media (max-width: 1200px) {
           .features { grid-template-columns: 1fr 1fr; }
         }
 
-        @media (max-width: 860px) {
+        @media (max-width: 920px) {
           .hero-inner { grid-template-columns: 1fr; padding: 36px 0; }
-          .hero-shot img { max-width: 100%; }
           .two-col { grid-template-columns: 1fr; }
+          .nowrap-desktop { white-space: normal; } /* allow wrap on small screens to avoid overflow */
         }
 
         @media (max-width: 560px) {
           .btn.large { height: 46px; line-height: 46px; }
-          .hero-copy h1 { font-size: 30px; }
-          .brand-logo { height: 46px; } /* slightly reduced on small screens */
+          .hero-title { font-size: 30px; }
+          .brand-logo { height: 50px; } /* a touch smaller on small screens */
         }
       `}</style>
     </>
   );
 }
-
-
