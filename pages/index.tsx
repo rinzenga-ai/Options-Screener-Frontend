@@ -189,15 +189,16 @@ export default function LandingPage() {
         :global(html, body) { padding: 0; margin: 0; }
         .page { background: #000; color: #e5e7eb; min-height: 100vh; }
 
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+        /* Container is now left-justified */
+        .container { width: 100%; padding: 0 16px; }
         .center { text-align: center; }
 
         /* Top nav */
         .nav { position: sticky; top: 0; z-index: 10; background: #000; border-bottom: 1px solid #0b0b0b; }
         .nav-inner { height: 56px; display: flex; align-items: center; justify-content: space-between; }
         .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
-        .brand-logo { height: 64px; width: auto; display: block; } /* doubled from 32px to 64px */
-        .brand-text { font-weight: 900; letter-spacing: .2px; color: #f3f4f6; }
+        .brand-logo { height: 44px; width: auto; display: block; } /* logo larger than before */
+        .brand-text { font-weight: 900; letter-spacing: .2px; color: #f3f4f6; font-size: 18px; }
         .links a { color: #cbd5e1; margin-left: 16px; text-decoration: none; font-weight: 600; }
         .links a:hover { color: #fff; }
 
@@ -262,9 +263,10 @@ export default function LandingPage() {
           .features { grid-template-columns: 1fr; }
           .btn.large { height: 46px; line-height: 46px; }
           .hero-copy h1 { font-size: 28px; }
-          .brand-logo { height: 52px; } /* keep logo readable on mobile */
+          .brand-logo { height: 36px; } /* slightly smaller on mobile */
         }
       `}</style>
     </>
   );
 }
+
