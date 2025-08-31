@@ -5,12 +5,11 @@ export default function LandingPage() {
   return (
     <>
       <Head>
-        <title>Options Screener — Data Driven Trade Evaluation Platform</title>
+        <title>Options Screener — Data-Driven Trade Evaluation</title>
         <meta
           name="description"
           content="Quantitative scoring for options trades. Configure tolerances, evaluate instantly, and export — built for institutional use."
         />
-        {/* Open Graph / Social */}
         <meta property="og:title" content="Options Screener" />
         <meta
           property="og:description"
@@ -18,7 +17,6 @@ export default function LandingPage() {
         />
         <meta property="og:image" content="/hero.png" />
         <meta property="og:type" content="website" />
-        {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Options Screener" />
         <meta
@@ -33,8 +31,8 @@ export default function LandingPage() {
         {/* ====== Top Nav ====== */}
         <header className="nav">
           <div className="container nav-inner">
-            <a href="/" className="brand" aria-label="INZ Options Screener Home">
-              <img src="/inz-logo.png" alt="INZ logo" className="brand-logo" />
+            <a href="/" className="brand" aria-label="Options Screener Home">
+              <img src="/inz-logo.png" alt="Logo" className="brand-logo" />
               <span className="brand-text">Options Screener</span>
             </a>
             <nav className="links" aria-label="Primary">
@@ -50,10 +48,10 @@ export default function LandingPage() {
         <section className="hero">
           <div className="container hero-inner">
             <div className="hero-copy">
-              <h1 className="hero-title nowrap-desktop">Data Driven Trade Evaluation Platform</h1>
+              <h1 className="hero-title">Data-Driven Trade Evaluation Platform</h1>
 
               <p className="sub">
-                Evaluate options trades with transparent scoring. Set your tolerances for ROI, Delta, Beta, and DTE,
+                Evaluate options trades with transparent scoring. Set tolerances for ROI, Delta, Beta, and DTE,
                 then compare candidates instantly — consistent, auditable, and easy to export.
               </p>
 
@@ -86,26 +84,28 @@ export default function LandingPage() {
 
         {/* ====== Problem ====== */}
         <section id="problem" className="section">
-          <div className="container two-col">
-            <div className="card">
-              <h2>The Problem</h2>
-              <p>
-                Evaluating puts/calls is noisy and manual. Traders juggle ROI, Delta, Beta, DTE and support levels
-                while bias slips in. Existing tools are slow, inconsistent, and hard to audit.
-              </p>
-            </div>
-            <div className="card">
-              <h2>What’s Needed</h2>
-              <p>
-                A configurable scoring system that applies risk thresholds consistently, surfaces the right opportunities,
-                and produces transparent outputs for review and compliance.
-              </p>
+          <div className="container">
+            <div className="grid-2">
+              <div className="card">
+                <h2>The Problem</h2>
+                <p>
+                  Evaluating puts/calls is noisy and manual. Traders juggle ROI, Delta, Beta, DTE and support levels
+                  while bias slips in. Existing tools are slow, inconsistent, and hard to audit.
+                </p>
+              </div>
+              <div className="card">
+                <h2>What’s Needed</h2>
+                <p>
+                  A configurable scoring system that applies risk thresholds consistently, surfaces the right opportunities,
+                  and produces transparent outputs for review and compliance.
+                </p>
+              </div>
             </div>
           </div>
         </section>
 
         {/* ====== Solution / Features ====== */}
-        <section id="solution" className="section light">
+        <section id="solution" className="section band">
           <div className="container">
             <div className="center">
               <h2>The Solution</h2>
@@ -139,7 +139,7 @@ export default function LandingPage() {
               <div className="feature" role="listitem">
                 <h3>Professional UI</h3>
                 <p>
-                  Clean, compact, and accessible. Light cards over a dark canvas to focus attention on decisions,
+                  Clean, compact, and accessible. Light cards over a dark canvas focus attention on decisions,
                   not clutter.
                 </p>
               </div>
@@ -148,25 +148,27 @@ export default function LandingPage() {
         </section>
 
         {/* ====== CTA ====== */}
-        <section id="cta" className="section cta">
-          <div className="container cta-inner">
-            <div>
-              <h2>See it in action</h2>
-              <p className="muted">
-                Try the live demo and download the one-pager. For enterprise licensing or a deeper walkthrough,
-                reach out anytime.
-              </p>
-            </div>
-            <div className="cta-buttons">
-              <a href="/app" className="btn primary large">Launch Demo</a>
-              <a
-                href="/one-pager.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn ghost large"
-              >
-                Download One-Pager
-              </a>
+        <section id="cta" className="section">
+          <div className="container">
+            <div className="cta-band">
+              <div className="cta-text">
+                <h2>See it in action</h2>
+                <p className="muted">
+                  Try the live demo and download the one-pager. For enterprise licensing or a deeper walkthrough,
+                  reach out anytime.
+                </p>
+              </div>
+              <div className="cta-buttons">
+                <a href="/app" className="btn primary large">Launch Demo</a>
+                <a
+                  href="/one-pager.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn ghost large"
+                >
+                  Download One-Pager
+                </a>
+              </div>
             </div>
           </div>
         </section>
@@ -192,16 +194,15 @@ export default function LandingPage() {
         :global(html, body) { padding: 0; margin: 0; }
         .page { background: #000; color: #e5e7eb; min-height: 100vh; }
 
-        /* Wider left-justified container so the page fills the screen at 100% without feeling narrow */
-        .container { max-width: 1380px; padding: 0 16px; margin-left: 0; margin-right: auto; }
-
+        /* Centered container, consistent width across sections */
+        .container { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
         .center { text-align: center; }
 
         /* Top nav */
         .nav { position: sticky; top: 0; z-index: 10; background: #000; border-bottom: 1px solid #0b0b0b; }
-        .nav-inner { height: 64px; display: flex; align-items: center; justify-content: space-between; }
+        .nav-inner { height: 68px; display: flex; align-items: center; justify-content: space-between; }
         .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
-        .brand-logo { height: 60px; width: auto; display: block; } /* increased logo size a bit more */
+        .brand-logo { height: 60px; width: auto; display: block; }
         .brand-text { font-weight: 900; letter-spacing: .2px; color: #f3f4f6; font-size: 18px; }
         .links a { color: #cbd5e1; margin-left: 16px; text-decoration: none; font-weight: 600; }
         .links a:hover { color: #fff; }
@@ -217,42 +218,57 @@ export default function LandingPage() {
         .btn.small { height: 30px; line-height: 30px; padding: 0 10px; border-radius: 8px; font-weight: 800; }
         .btn.large { height: 48px; line-height: 48px; padding: 0 18px; border-radius: 12px; font-size: 16px; }
 
-        /* Hero */
+        /* Hero band with subtle gradients, centered content */
         .hero {
-          background: radial-gradient(1200px 600px at 20% -10%, rgba(37,99,235,.25), transparent 60%),
-                      radial-gradient(1000px 500px at 90% -10%, rgba(16,185,129,.18), transparent 50%),
-                      #000;
+          background:
+            radial-gradient(1200px 600px at 20% -10%, rgba(37,99,235,.25), transparent 60%),
+            radial-gradient(1000px 500px at 90% -10%, rgba(16,185,129,.18), transparent 50%),
+            #000;
           border-bottom: 1px solid #0b0b0b;
         }
-        .hero-inner { display: grid; grid-template-columns: 1.05fr .95fr; gap: 28px; padding: 56px 0; align-items: center; }
-        .hero-title { margin: 0 0 18px; font-size: 40px; font-weight: 900; color: #fff; }
-        .nowrap-desktop { white-space: nowrap; }
-        .sub { margin: 0 0 18px; color: #d6d9df; max-width: 760px; line-height: 1.65; }
+        .hero-inner {
+          display: grid; grid-template-columns: 1.1fr .9fr; gap: 32px;
+          align-items: center; padding: 60px 0; min-height: 72vh;
+        }
+        .hero-copy { text-align: center; }
+        .hero-title { margin: 0 0 18px; font-size: 42px; font-weight: 900; color: #fff; }
+        .sub { margin: 0 auto 20px; color: #d6d9df; max-width: 820px; line-height: 1.65; }
 
-        /* Bullets: indented and white dots */
-        .bullets { margin: 6px 0 20px; padding-left: 0; list-style: none; }
-        .bullets li { display: flex; align-items: baseline; gap: 10px; margin: 8px 0; color: #e8eaee; line-height: 1.6; }
-        .bullets { margin-left: 22px; }        /* indent bullets a bit */
-        .dot { display: inline-block; width: 7px; height: 7px; border-radius: 999px; background: #ffffff; margin-top: 7px; flex: 0 0 7px; }
+        /* Bullets: centered block with white dots */
+        .bullets { margin: 0 auto 22px; padding-left: 0; list-style: none; max-width: 760px; }
+        .bullets li { display: flex; gap: 12px; margin: 10px 0; color: #eceff4; line-height: 1.6; }
+        .bullets .dot { display: inline-block; width: 7px; height: 7px; border-radius: 999px; background: #fff; margin-top: 8px; flex: 0 0 7px; }
+        .cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
-        .cta { display: flex; gap: 12px; margin: 12px 0 0; flex-wrap: wrap; }
+        .hero-shot { display: flex; justify-content: center; }
         .hero-shot img { width: 100%; max-width: 640px; height: auto; border-radius: 14px; border: 1px solid #1f2937; box-shadow: 0 12px 30px rgba(0,0,0,.45); background: #0b0b0b; }
 
         /* Sections */
-        .section { padding: 44px 0; }
-        .section.light { background: #0a0a0a; border-top: 1px solid #0b0b0b; border-bottom: 1px solid #0b0b0b; }
-        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-        .card { background: #e9eef5; color: #0f172a; border: 1px solid #cbd5e1; border-radius: 12px; padding: 16px; box-shadow: 0 8px 18px rgba(0,0,0,.25); }
-        .card h2 { margin: 0 0 6px; color: #0f172a; }
+        .section { padding: 48px 0; }
+        .band { background: #0a0a0a; border-top: 1px solid #0b0b0b; border-bottom: 1px solid #0b0b0b; }
 
-        .features { margin-top: 18px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-        .feature { background: #f1f5f9; color: #0f172a; border: 1px solid #d7dee8; border-radius: 12px; padding: 14px; box-shadow: 0 6px 14px rgba(0,0,0,.15); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .card {
+          background: #e9eef5; color: #0f172a; border: 1px solid #cbd5e1; border-radius: 12px;
+          padding: 18px; box-shadow: 0 8px 18px rgba(0,0,0,.25);
+        }
+        .card h2 { margin: 0 0 8px; color: #0f172a; }
+
+        .features { margin-top: 18px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+        .feature {
+          background: #f1f5f9; color: #0f172a; border: 1px solid #d7dee8; border-radius: 12px;
+          padding: 16px; box-shadow: 0 6px 14px rgba(0,0,0,.15);
+        }
         .feature h3 { margin: 0 0 6px; }
 
-        /* CTA band */
-        .cta { background: #000; }
-        .cta-inner { display: grid; grid-template-columns: 1.2fr .8fr; gap: 18px; align-items: center; }
-        .cta-buttons { display: flex; gap: 14px; } /* slight extra space between buttons at the bottom */
+        /* CTA Band */
+        .cta-band {
+          display: grid; grid-template-columns: 1.2fr .8fr; gap: 18px; align-items: center;
+          background: #0a0a0a; border: 1px solid #101214; border-radius: 14px;
+          padding: 18px 20px;
+        }
+        .cta-text h2 { margin: 0 0 8px; }
+        .cta-buttons { display: flex; gap: 16px; justify-content: flex-end; flex-wrap: wrap; }
 
         /* Footer */
         .footer { border-top: 1px solid #0b0b0b; background: #000; }
@@ -265,19 +281,19 @@ export default function LandingPage() {
         @media (max-width: 1200px) {
           .features { grid-template-columns: 1fr 1fr; }
         }
-
-        @media (max-width: 920px) {
-          .hero-inner { grid-template-columns: 1fr; padding: 36px 0; }
-          .two-col { grid-template-columns: 1fr; }
-          .nowrap-desktop { white-space: normal; } /* allow wrap on small screens to avoid overflow */
+        @media (max-width: 940px) {
+          .hero-inner { grid-template-columns: 1fr; padding: 44px 0; min-height: auto; }
+          .grid-2 { grid-template-columns: 1fr; }
+          .cta-band { grid-template-columns: 1fr; gap: 12px; }
+          .cta-buttons { justify-content: center; }
         }
-
         @media (max-width: 560px) {
+          .hero-title { font-size: 32px; }
+          .brand-logo { height: 50px; }
           .btn.large { height: 46px; line-height: 46px; }
-          .hero-title { font-size: 30px; }
-          .brand-logo { height: 50px; } /* a touch smaller on small screens */
         }
       `}</style>
     </>
   );
 }
+
