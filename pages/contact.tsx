@@ -1,178 +1,122 @@
-import React, { useState } from "react";
+import React from "react";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 export default function ContactPage() {
-  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
-  };
-
-  // Simple mailto handler (no backend). We can wire Formspree/EmailJS later.
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const subject = encodeURIComponent("Options Screener — Contact");
-    const body = encodeURIComponent(
-      `Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone}\n\nMessage:\n${form.message}`
-    );
-    window.location.href = `mailto:rinzenga@yahoo.com?subject=${subject}&body=${body}`;
-  };
+  const router = useRouter();
+  const sent = router.query.sent === "1";
 
   return (
     <>
       <Head>
-        <title>Contact — Options Screener</title>
+        <title>Contact • Options Screener</title>
         <meta name="description" content="Contact the Options Screener team." />
       </Head>
 
       <div className="page">
-        <header className="nav">
-          <div className="container nav-inner">
-            <a href="/" className="brand" aria-label="Options Screener Home">
-              <img src="/inz-logo.png" alt="Logo" className="brand-logo" />
-              <span className="brand-text">Options Screener</span>
-            </a>
-            <nav className="links" aria-label="Primary">
-              <a href="/">Home</a>
-              <a href="/app" className="btn small primary">Launch Demo</a>
-            </nav>
-          </div>
+        <header className="hero">
+          <h1>Contact</h1>
+          <p>Questions, demo requests, or enterprise discussions—happy to help.</p>
         </header>
 
-        <main className="container main">
-          <h1>Contact</h1>
+        <main className="wrap">
+          {sent && (
+            <div className="alert success">
+              Thank you—your message was sent. I’ll get back to you shortly.
+            </div>
+          )}
 
-          <div className="grid">
-            <form className="card" onSubmit={handleSubmit} noValidate>
-              <div className="row">
-                <label htmlFor="name">Name</label>
-                <input
-                  id="name" name="name" type="text" value={form.name}
-                  onChange={handleChange} placeholder="Your name" required
-                />
-              </div>
-              <div className="row">
-                <label htmlFor="email">Email</label>
-                <input
-                  id="email" name="email" type="email" value={form.email}
-                  onChange={handleChange} placeholder="you@example.com" required
-                />
-              </div>
-              <div className="row">
-                <label htmlFor="phone">Phone</label>
-                <input
-                  id="phone" name="phone" type="tel" value={form.phone}
-                  onChange={handleChange} placeholder="111-222-3434"
-                />
-              </div>
-              <div className="row">
-                <label htmlFor="message">Message</label>
-                <textarea
-                  id="message" name="message" value={form.message}
-                  onChange={handleChange} placeholder="How can we help?" required
-                />
-              </div>
-              <button type="submit" className="btn primary">Send Message</button>
-            </form>
+          <section className="grid">
+            {/* Left: Direct contact info */}
+            <div className="card">
+              <h2>Reach me directly</h2>
+              <ul className="contact-list">
+                <li><span>📧</span><a href="mailto:rinzenga@yahoo.com">rinzenga@yahoo.com</a></li>
+                <li><span>📞</span><a href="tel:16018628625">601.862.8625</a></li>
+                <li><span>🌐</span><a href="https://options-screener-frontend.vercel.app" target="_blank" rel="noopener noreferrer">options-screener-frontend.vercel.app</a></li>
+              </ul>
+              <p className="note">
+                Prefer email? That’s the quickest way to reach me. For a deeper walkthrough,
+                include a couple of times that work for you.
+              </p>
+            </div>
 
-            <aside className="card direct">
-              <h2>Direct</h2>
-              <p><strong>Ryan Inzenga</strong></p>
-              <p><a href="mailto:rinzenga@yahoo.com" className="link">rinzenga@yahoo.com</a></p>
-              <p><a href="tel:+16018628625" className="link">601.862.8625</a></p>
-              <p className="muted">We typically reply within 1 business day.</p>
-            </aside>
-          </div>
+            {/* Right: Formspree-powered form */}
+            <div className="card">
+              <h2>Send a message</h2>
+              <form
+                action="https://formspree.io/f/xqadbgel" // <-- replace with e.g. https://formspree.io/f/abcxyz
+                method="POST"
+              >
+                {/* Helpful metadata */}
+                <input type="hidden" name="_subject" value="Options Screener: New Contact" />
+                {/* Redirect back to this page with a success flag */}
+                <input type="hidden" name="_redirect" value="/contact?sent=1" />
+
+                <div className="row">
+                  <label htmlFor="name">Name</label>
+                  <input id="name" name="name" type="text" required placeholder="Your name" />
+                </div>
+
+                <div className="row">
+                  <label htmlFor="email">Email</label>
+                  <input id="email" name="email" type="email" required placeholder="you@example.com" />
+                </div>
+
+                <div className="row">
+                  <label htmlFor="phone">Phone</label>
+                  <input id="phone" name="phone" type="tel" placeholder="111-222-3434" />
+                </div>
+
+                <div className="row">
+                  <label htmlFor="message">Message</label>
+                  <textarea id="message" name="message" rows={5} required placeholder="How can I help?" />
+                </div>
+
+                <div className="actions">
+                  <button type="submit" className="btn primary">Send Message</button>
+                </div>
+              </form>
+            </div>
+          </section>
         </main>
-
-        <footer className="footer">
-          <div className="container footer-inner">
-            <div className="foot-left">
-              <strong>Options Screener</strong>
-              <div className="fine">© {new Date().getFullYear()} — All rights reserved.</div>
-            </div>
-            <div className="foot-right">
-              <a href="/contact" className="muted">Contact</a>
-              <span className="sep" aria-hidden>•</span>
-              <span className="muted">For demonstration purposes; not financial advice.</span>
-            </div>
-          </div>
-        </footer>
       </div>
 
       <style jsx>{`
-        :global(html, body) { margin: 0; padding: 0; }
-        .page { background: #000; color: #e5e7eb; min-height: 100vh; }
+        .page { min-height: 100vh; background: #0b1220; color: #e5e7eb; }
+        .hero { padding: 36px 16px 8px; text-align: center; }
+        .hero h1 { margin: 0 0 6px; font-size: 32px; font-weight: 900; color: #fff; }
+        .hero p { margin: 0; color: #cbd5e1; }
 
-        .container { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
+        .wrap { max-width: 980px; margin: 0 auto; padding: 16px; }
+        .alert { padding: 12px 14px; border-radius: 10px; margin-bottom: 12px; border: 1px solid #334155; }
+        .alert.success { background: #052e1a; border-color: #10b981; color: #d1fae5; }
 
-        /* Nav */
-        .nav { position: sticky; top: 0; z-index: 10; background: #000; border-bottom: 1px solid #0b0b0b; }
-        .nav-inner { height: 68px; display: flex; align-items: center; justify-content: space-between; }
-        .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
-        .brand-logo { height: 56px; width: auto; display: block; }
-        .brand-text { font-weight: 900; letter-spacing: .2px; color: #f3f4f6; font-size: 18px; }
-        .links { display: flex; align-items: center; gap: 16px; }
-        .links a { color: #cbd5e1; text-decoration: none; font-weight: 600; }
-        .links a:hover { color: #fff; }
-        .btn.small { height: 30px; line-height: 30px; padding: 0 10px; border-radius: 8px; font-weight: 800; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
 
-        .btn { display: inline-block; height: 40px; line-height: 40px; padding: 0 16px; border-radius: 10px;
-               text-decoration: none; font-weight: 800; border: 1px solid #64748b; background: #f8fafc; color: #0f172a; }
+        .card { background: #101828; border: 1px solid #243043; border-radius: 12px; padding: 16px; }
+        .card h2 { margin: 0 0 10px; color: #fff; font-size: 20px; }
+
+        .contact-list { list-style: none; padding: 0; margin: 0 0 12px; }
+        .contact-list li { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; color: #e5e7eb; }
+        .contact-list a { color: #93c5fd; text-decoration: none; }
+        .contact-list a:hover { text-decoration: underline; }
+        .note { color: #cbd5e1; margin: 6px 0 0; font-size: 14px; }
+
+        form { display: grid; gap: 10px; }
+        .row { display: grid; gap: 6px; }
+        label { color: #cbd5e1; font-weight: 700; }
+        input, textarea {
+          background: #0f172a; color: #e5e7eb; border: 1px solid #334155; border-radius: 8px;
+          padding: 10px 12px; font-size: 14px; outline: none;
+        }
+        input:focus, textarea:focus { border-color: #60a5fa; box-shadow: 0 0 0 2px rgba(96,165,250,.2); }
+
+        .actions { display: flex; gap: 8px; }
+        .btn { height: 36px; padding: 0 14px; border-radius: 8px; border: 1px solid #334155; background: #0f172a; color: #e5e7eb; cursor: pointer; }
         .btn.primary { background: #2563eb; border-color: #2563eb; color: #fff; }
         .btn.primary:hover { background: #1d4ed8; }
-
-        /* Main */
-        .main { padding: 40px 0; }
-        .main h1 { text-align: center; margin: 0 0 20px; font-size: 34px; font-weight: 900; }
-
-        .grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 18px; align-items: start; }
-
-        .card {
-          background: #e9eef5; color: #0f172a; border: 1px solid #cbd5e1; border-radius: 12px;
-          padding: 18px; box-shadow: 0 8px 18px rgba(0,0,0,.25);
-        }
-
-        /* Ensure inputs never overflow the card */
-        form .row { display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
-        label { color: #0f172a; font-weight: 700; font-size: 14px; }
-        input, textarea {
-          display: block;
-          width: 100%;
-          max-width: 100%;
-          box-sizing: border-box; /* critical: no overflow */
-          padding: 10px 12px;
-          border-radius: 10px;
-          border: 1px solid #94a3b8;
-          background: #ffffff;
-          color: #0f172a;
-          font-size: 15px;
-        }
-        input:focus, textarea:focus {
-          outline: none;
-          border-color: #2563eb;
-          box-shadow: 0 0 0 3px rgba(37,99,235,.2);
-        }
-        textarea { min-height: 120px; resize: vertical; }
-
-        .direct h2 { margin: 0 0 8px; }
-        .link { color: #0f172a; text-decoration: underline; }
-        .link:hover { color: #1f2937; }
-        .muted { color: #374151; }
-
-        /* Footer */
-        .footer { border-top: 1px solid #0b0b0b; background: #000; }
-        .footer-inner { height: 72px; display: flex; align-items: center; justify-content: space-between; }
-        .fine { color: #94a3b8; font-size: 12px; margin-top: 2px; }
-        .muted { color: #94a3b8; text-decoration: none; }
-        .muted:hover { color: #cbd5e1; }
-        .sep { margin: 0 8px; color: #334155; }
-
-        /* Responsive */
-        @media (max-width: 940px) {
-          .grid { grid-template-columns: 1fr; }
-        }
       `}</style>
     </>
   );
