@@ -40,6 +40,8 @@ export default function LandingPage() {
               <a href="#solution">Solution</a>
               <a href="#features">Features</a>
               <a href="/app" className="btn small primary">Launch Demo</a>
+              {/* New: Contact link styled like the other text links */}
+              <a href="/contact">Contact</a>
             </nav>
           </div>
         </header>
@@ -154,8 +156,7 @@ export default function LandingPage() {
               <div className="cta-text">
                 <h2>See it in action</h2>
                 <p className="muted">
-                  Try the live demo and download the one-pager. For enterprise licensing or a deeper walkthrough,
-                  reach out anytime.
+                  Try the live demo and download the one-pager. And for a deeper walkthrough, feel free to reach out anytime.
                 </p>
               </div>
               <div className="cta-buttons">
@@ -181,7 +182,7 @@ export default function LandingPage() {
               <div className="fine">© {new Date().getFullYear()} — All rights reserved.</div>
             </div>
             <div className="foot-right">
-              <a href="mailto:youremail@example.com" className="muted">Contact</a>
+              <a href="/contact" className="muted">Contact</a>
               <span className="sep" aria-hidden>•</span>
               <span className="muted">For demonstration purposes; not financial advice.</span>
             </div>
@@ -204,8 +205,10 @@ export default function LandingPage() {
         .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
         .brand-logo { height: 60px; width: auto; display: block; }
         .brand-text { font-weight: 900; letter-spacing: .2px; color: #f3f4f6; font-size: 18px; }
-        .links a { color: #cbd5e1; margin-left: 16px; text-decoration: none; font-weight: 600; }
+        .links { display: flex; align-items: center; gap: 16px; }
+        .links a { color: #cbd5e1; text-decoration: none; font-weight: 600; }
         .links a:hover { color: #fff; }
+        .links .btn.small { margin-left: 6px; } /* keep a bit of space before the Contact link */
 
         /* Buttons */
         .btn { display: inline-block; height: 40px; line-height: 40px; padding: 0 16px; border-radius: 10px;
@@ -218,7 +221,7 @@ export default function LandingPage() {
         .btn.small { height: 30px; line-height: 30px; padding: 0 10px; border-radius: 8px; font-weight: 800; }
         .btn.large { height: 48px; line-height: 48px; padding: 0 18px; border-radius: 12px; font-size: 16px; }
 
-        /* Hero band with subtle gradients, centered content */
+        /* Hero band */
         .hero {
           background:
             radial-gradient(1200px 600px at 20% -10%, rgba(37,99,235,.25), transparent 60%),
@@ -231,13 +234,13 @@ export default function LandingPage() {
           align-items: center; padding: 60px 0; min-height: 72vh;
         }
         .hero-copy { text-align: center; }
-        .hero-title { margin: 0 0 18px; font-size: 42px; font-weight: 900; color: #fff; }
+        .hero-title { margin: 0 0 18px; font-size: 42px; font-weight: 900; color: #fff; white-space: nowrap; }
         .sub { margin: 0 auto 20px; color: #d6d9df; max-width: 820px; line-height: 1.65; }
 
-        /* Bullets: centered block with white dots */
+        /* Bullets */
         .bullets { margin: 0 auto 22px; padding-left: 0; list-style: none; max-width: 760px; }
         .bullets li { display: flex; gap: 12px; margin: 10px 0; color: #eceff4; line-height: 1.6; }
-        .bullets .dot { display: inline-block; width: 7px; height: 7px; border-radius: 999px; background: #fff; margin-top: 8px; flex: 0 0 7px; }
+        .dot { display: inline-block; width: 7px; height: 7px; border-radius: 999px; background: #fff; margin-top: 8px; flex: 0 0 7px; }
         .cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
         .hero-shot { display: flex; justify-content: center; }
@@ -274,7 +277,8 @@ export default function LandingPage() {
         .footer { border-top: 1px solid #0b0b0b; background: #000; }
         .footer-inner { height: 72px; display: flex; align-items: center; justify-content: space-between; }
         .fine { color: #94a3b8; font-size: 12px; margin-top: 2px; }
-        .muted { color: #94a3b8; }
+        .muted { color: #94a3b8; text-decoration: none; }
+        .muted:hover { color: #cbd5e1; }
         .sep { margin: 0 8px; color: #334155; }
 
         /* Responsive */
@@ -286,9 +290,9 @@ export default function LandingPage() {
           .grid-2 { grid-template-columns: 1fr; }
           .cta-band { grid-template-columns: 1fr; gap: 12px; }
           .cta-buttons { justify-content: center; }
+          .hero-title { white-space: normal; } /* allow wrap on smaller screens */
         }
         @media (max-width: 560px) {
-          .hero-title { font-size: 32px; }
           .brand-logo { height: 50px; }
           .btn.large { height: 46px; line-height: 46px; }
         }
